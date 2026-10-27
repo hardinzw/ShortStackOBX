@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- EDIT: page title and description show up in Google results and link previews -->
+  <title>ShortStack · Outer Banks Summer Rental</title>
+  <meta name="description" content="[Property Name] — a [X]-bedroom summer rental in [Town], Outer Banks, North Carolina. Steps from the beach. Check weekly availability and send an inquiry.">
+  <meta property="og:title" content="[Property Name] · Outer Banks Summer Rental">
+  <meta property="og:description" content="[X] bedrooms · [X] baths · sleeps [X] · [Town], NC">
+  <meta property="og:image" content="images/hero.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --sand: #f6f7f9;
+      --sand-deep: #e4e8ee;
+      --ink: #14213d;
+      --muted: #56607a;
+      --sea: #1d3a6e;
+      --sea-dark: #14213d;
+      --sun: #c8402f;
+      --booked: #c4cad6;
+      --sun-hover: #a83426;
+      --sun-light: #f6b1a6;
+      --white: #ffffff;
+      --radius: 14px;
+      --max: 1120px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Inter", system-ui, sans-serif;
+      color: var(--ink);
+      background: var(--sand);
+      line-height: 1.6;
+    }
+    h1, h2, h3 { font-family: "Fraunces", Georgia, serif; font-weight: 600; line-height: 1.15; margin: 0 0 .5em; }
+    h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); }
+    a { color: var(--sea); }
+    img { max-width: 100%; display: block; }
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 20px; }
+    section { padding: 80px 0; }
+    .eyebrow { text-transform: uppercase; letter-spacing: .14em; font-size: .78rem; font-weight: 600; color: var(--sea); margin-bottom: .6em; }
+    .btn {
+      display: inline-block; padding: 14px 26px; border-radius: 999px; border: 0;
+      background: var(--sun); color: var(--white); font: 600 1rem "Inter", sans-serif;
+      text-decoration: none; cursor: pointer; transition: transform .15s, background .15s;
+    }
+    .btn:hover { transform: translateY(-1px); background: var(--sun-hover); }
+    .btn.ghost { background: transparent; color: var(--white); box-shadow: inset 0 0 0 2px rgba(255,255,255,.8); }
+
+    /* Nav */
+    nav {
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(246,247,249,.92); backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--sand-deep);
+    }
+    nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    nav .brand { font-family: "Fraunces", serif; font-weight: 600; font-size: 1.2rem; text-decoration: none; color: var(--ink); }
+    nav ul { display: flex; gap: 24px; list-style: none; margin: 0; padding: 0; }
+    nav ul a { color: var(--ink); text-decoration: none; font-weight: 500; font-size: .95rem; }
+    nav ul a:hover { color: var(--sea); }
+    @media (max-width: 760px) { nav ul { display: none; } }
+
+    /* Hero — replace images/hero.jpg with your best exterior or ocean-view shot */
+    .hero {
+      min-height: 88vh; display: flex; align-items: flex-end; color: var(--white);
+      background:
+        linear-gradient(180deg, rgba(20,33,61,.15) 0%, rgba(20,33,61,.65) 100%),
+        url("images/hero.jpg") center/cover,
+        linear-gradient(160deg, #6f8fbf 0%, #1d3a6e 55%, #e4e8ee 100%);
+      padding: 0 0 80px;
+    }
+    .hero h1 { font-size: clamp(2.6rem, 7vw, 5rem); max-width: 14ch; }
+    .hero p.lead { font-size: 1.2rem; max-width: 46ch; opacity: .95; }
+    .hero .actions { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 28px; }
+    .facts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; padding: 0; list-style: none; }
+    .facts li { background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.35); padding: 6px 14px; border-radius: 999px; font-size: .92rem; }
+
+    /* About */
+    .about { display: grid; grid-template-columns: 1.1fr .9fr; gap: 56px; align-items: center; }
+    .about p { color: var(--muted); font-size: 1.08rem; }
+    .highlights { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .highlight { background: var(--white); border-radius: var(--radius); padding: 22px; }
+    .highlight strong { display: block; font-family: "Fraunces", serif; font-size: 1.15rem; margin-bottom: 4px; }
+    .highlight span { color: var(--muted); font-size: .95rem; }
+    @media (max-width: 860px) { .about { grid-template-columns: 1fr; } }
+
+    /* Gallery */
+    .gallery-section { background: var(--white); }
+    .gallery { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 200px; gap: 12px; margin-top: 32px; }
+    .gallery figure { margin: 0; border-radius: var(--radius); overflow: hidden; position: relative; background: var(--sand-deep); cursor: zoom-in; }
+    .gallery figure.wide { grid-column: span 2; }
+    .gallery figure.tall { grid-row: span 2; }
+    .gallery img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
+    .gallery figure:hover img { transform: scale(1.04); }
+    .gallery figcaption { position: absolute; left: 12px; bottom: 10px; color: var(--white); font-size: .85rem; font-weight: 500; text-shadow: 0 1px 4px rgba(0,0,0,.6); }
+    /* Shown until a real photo is in place */
+    .gallery figure.missing { display: grid; place-items: center; cursor: default; background: repeating-linear-gradient(45deg, var(--sand), var(--sand) 12px, var(--sand-deep) 12px, var(--sand-deep) 24px); }
+    .gallery figure.missing img { display: none; }
+    .gallery figure.missing figcaption { position: static; color: var(--muted); text-shadow: none; text-align: center; padding: 0 12px; }
+    @media (max-width: 760px) {
+      .gallery { grid-template-columns: 1fr 1fr; grid-auto-rows: 160px; }
+      .gallery figure.wide { grid-column: span 2; }
+      .gallery figure.tall { grid-row: span 1; }
+    }
+    .lightbox { position: fixed; inset: 0; background: rgba(20,33,61,.94); display: none; place-items: center; z-index: 50; padding: 20px; cursor: zoom-out; }
+    .lightbox.open { display: grid; }
+    .lightbox img { max-height: 90vh; border-radius: 8px; }
+
+    /* Amenities */
+    .amenities { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 28px; margin-top: 32px; }
+    .amenities h3 { font-size: 1.15rem; color: var(--sea-dark); }
+    .amenities ul { list-style: none; margin: 0; padding: 0; }
+    .amenities li { padding: 6px 0 6px 26px; position: relative; border-bottom: 1px solid var(--sand-deep); }
+    .amenities li::before { content: ""; position: absolute; left: 4px; top: 15px; width: 10px; height: 10px; border-radius: 50%; background: var(--sun); }
+
+    /* Rates & availability */
+    .rates-section { background: var(--sea-dark); color: var(--white); }
+    .rates-section .eyebrow { color: var(--sun-light); }
+    .rates-section p.note { opacity: .85; max-width: 60ch; }
+    .legend { display: flex; gap: 20px; margin: 24px 0 16px; font-size: .9rem; flex-wrap: wrap; }
+    .legend span::before { content: ""; display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 8px; vertical-align: -1px; }
+    .legend .l-open::before { background: var(--white); }
+    .legend .l-booked::before { background: var(--booked); opacity: .5; }
+    .weeks { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+    .week {
+      background: var(--white); color: var(--ink); border-radius: 12px; padding: 16px 18px;
+      border: 2px solid transparent; text-align: left; font: inherit; cursor: pointer; transition: border-color .15s, transform .15s;
+    }
+    .week:hover { border-color: var(--sun); transform: translateY(-2px); }
+    .week .dates { font-weight: 600; }
+    .week .tier { font-size: .8rem; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+    .week .price { font-family: "Fraunces", serif; font-size: 1.4rem; color: var(--sea-dark); }
+    .week.booked { background: rgba(255,255,255,.12); color: rgba(255,255,255,.6); cursor: not-allowed; }
+    .week.booked:hover { border-color: transparent; transform: none; }
+    .week.booked .price, .week.booked .tier { color: rgba(255,255,255,.6); }
+    .policies { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 40px; }
+    .policies div { border-top: 2px solid var(--sun); padding-top: 12px; font-size: .95rem; opacity: .92; }
+    .policies strong { display: block; margin-bottom: 4px; }
+
+    /* Location */
+    .location { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+    .location iframe { width: 100%; height: 380px; border: 0; border-radius: var(--radius); background: var(--sand-deep); }
+    .nearby { list-style: none; padding: 0; margin: 20px 0 0; }
+    .nearby li { display: flex; justify-content: space-between; gap: 16px; padding: 10px 0; border-bottom: 1px solid var(--sand-deep); }
+    .nearby li span:last-child { color: var(--muted); white-space: nowrap; }
+    @media (max-width: 860px) { .location { grid-template-columns: 1fr; } }
+
+    /* Inquiry */
+    .inquire-section { background: var(--white); }
+    .inquire { display: grid; grid-template-columns: .8fr 1.2fr; gap: 56px; }
+    form { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    form .full { grid-column: 1 / -1; }
+    label { display: block; font-size: .88rem; font-weight: 600; margin-bottom: 6px; }
+    input, select, textarea {
+      width: 100%; padding: 12px 14px; border-radius: 10px; border: 1px solid #c4cad6;
+      font: inherit; background: var(--sand); color: var(--ink);
+    }
+    input:focus, select:focus, textarea:focus { outline: 2px solid var(--sea); border-color: transparent; }
+    textarea { min-height: 120px; resize: vertical; }
+    .form-msg { grid-column: 1 / -1; color: var(--sea-dark); font-weight: 500; min-height: 1.5em; margin: 0; }
+    @media (max-width: 860px) { .inquire { grid-template-columns: 1fr; } }
+    @media (max-width: 520px) { form { grid-template-columns: 1fr; } }
+
+    footer { padding: 40px 0; color: var(--muted); font-size: .9rem; }
+    footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="wrap">
+      <a class="brand" href="#top">Short Stack OBX</a>
+      <ul>
+        <li><a href="#about">The House</a></li>
+        <li><a href="#photos">Photos</a></li>
+        <li><a href="#amenities">Amenities</a></li>
+        <li><a href="#rates">Rates</a></li>
+        <li><a href="#location">Location</a></li>
+      </ul>
+      <a class="btn" href="#inquire" style="padding:10px 20px">Check dates</a>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="wrap">
+      <div class="eyebrow" style="color:var(--sun-light)">Nags Head · Outer Banks, NC</div>
+      <h1>[Your summer on the Outer Banks starts here]</h1>
+      <p class="lead">[One or two sentences that sell the feeling: morning coffee on the deck, a short walk over the dunes, sunsets over the sound.]</p>
+      <ul class="facts">
+        <li>[X] bedrooms</li>
+        <li>[X] baths</li>
+        <li>Sleeps [X]</li>
+        <li>[X] min walk to beach</li>
+        <li>[Private pool]</li>
+      </ul>
+      <div class="actions">
+        <a class="btn" href="#rates">See summer availability</a>
+        <a class="btn ghost" href="#photos">View photos</a>
+      </div>
+    </div>
+  </header>
+
+  <section id="about">
+    <div class="wrap about">
+      <div>
+        <div class="eyebrow">The House</div>
+        <h2>[A headline about what makes this place special]</h2>
+        <p>[Describe the house in a few short paragraphs. What's the layout? Who is it perfect for — multi-generation families, a couple of families sharing, a group of friends? What do past guests love most?]</p>
+        <p>[Mention the neighborhood: quiet cul-de-sac, oceanside vs. soundside, milepost, and anything a guest would otherwise ask about.]</p>
+      </div>
+      <div class="highlights">
+        <div class="highlight"><strong>[Ocean view]</strong><span>[From the top-floor deck]</span></div>
+        <div class="highlight"><strong>[Private pool]</strong><span>[Heated, fenced]</span></div>
+        <div class="highlight"><strong>[Walk to beach]</strong><span>[Public access ~X yards]</span></div>
+        <div class="highlight"><strong>[Pet friendly]</strong><span>[Up to 2 dogs, fee applies]</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="photos" class="gallery-section">
+    <div class="wrap">
+      <div class="eyebrow">Photos</div>
+      <h2>Take a look around</h2>
+      <!-- EDIT: put your photos in the images/ folder with these names (or change the src values).
+           Any photo that's missing shows a striped placeholder instead. -->
+      <div class="gallery">
+        <figure class="wide tall"><img src="images/exterior.jpg" alt="Exterior of the house"><figcaption>Exterior</figcaption></figure>
+        <figure><img src="images/living.jpg" alt="Living room"><figcaption>Living room</figcaption></figure>
+        <figure><img src="images/kitchen.jpg" alt="Kitchen"><figcaption>Kitchen</figcaption></figure>
+        <figure class="wide"><img src="images/deck.jpg" alt="Deck with view"><figcaption>Deck</figcaption></figure>
+        <figure><img src="images/primary-bedroom.jpg" alt="Primary bedroom"><figcaption>Primary bedroom</figcaption></figure>
+        <figure><img src="images/pool.jpg" alt="Pool"><figcaption>Pool</figcaption></figure>
+        <figure class="wide"><img src="images/beach.jpg" alt="The beach nearby"><figcaption>The beach</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="amenities">
+    <div class="wrap">
+      <div class="eyebrow">Amenities</div>
+      <h2>Everything you need for the week</h2>
+      <!-- EDIT: keep what's true, delete what isn't, add your own -->
+      <div class="amenities">
+        <div>
+          <h3>Sleeping</h3>
+          <ul>
+            <li>[King — primary suite]</li>
+            <li>[Queen — bedroom 2]</li>
+            <li>[2 twins — bedroom 3]</li>
+            <li>[Bunk room — bedroom 4]</li>
+            <li>Linens &amp; towels [provided / bring your own]</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Outdoors</h3>
+          <ul>
+            <li>[Private pool]</li>
+            <li>[Hot tub]</li>
+            <li>[Covered &amp; open decks]</li>
+            <li>[Outdoor shower]</li>
+            <li>[Gas grill]</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Beach gear</h3>
+          <ul>
+            <li>[Beach chairs &amp; umbrella]</li>
+            <li>[Boogie boards]</li>
+            <li>[Beach cart]</li>
+            <li>[Bikes]</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Inside</h3>
+          <ul>
+            <li>Central A/C</li>
+            <li>[Fast Wi-Fi]</li>
+            <li>[Full kitchen with dishwasher]</li>
+            <li>[Washer &amp; dryer]</li>
+            <li>[Smart TVs with streaming]</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="rates" class="rates-section">
+    <div class="wrap">
+      <div class="eyebrow">Summer <span class="season-year"></span></div>
+      <h2>Rates &amp; availability</h2>
+      <p class="note">Summer stays are weekly, Saturday to Saturday. Tap an open week to start an inquiry. Rates shown are before taxes and fees.</p>
+      <div class="legend"><span class="l-open">Available</span><span class="l-booked">Booked</span></div>
+      <div class="weeks" id="weeks"></div>
+      <div class="policies">
+        <!-- EDIT: your actual policies -->
+        <div><strong>Check-in / out</strong>[4:00 PM] / [10:00 AM] Saturday</div>
+        <div><strong>Deposit</strong>[50% to reserve, balance due 30 days before arrival]</div>
+        <div><strong>Cancellation</strong>[Your cancellation policy]</div>
+        <div><strong>House rules</strong>[No smoking · Pets with approval · Min. renter age 25]</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="location">
+    <div class="wrap location">
+      <div>
+        <div class="eyebrow">Location</div>
+        <h2>[Town], right in the middle of it all</h2>
+        <p style="color:var(--muted)">[A sentence about the area — e.g. close to the Wright Brothers Memorial, Jockey's Ridge, and the best fish tacos on the beach road.]</p>
+        <!-- EDIT: real distances from the house -->
+        <ul class="nearby">
+          <li><span>Beach access</span><span>[X min walk]</span></li>
+          <li><span>[Grocery store]</span><span>[X min drive]</span></li>
+          <li><span>Jockey's Ridge State Park</span><span>[X min drive]</span></li>
+          <li><span>Wright Brothers National Memorial</span><span>[X min drive]</span></li>
+          <li><span>Cape Hatteras Lighthouse</span><span>[X min drive]</span></li>
+          <li><span>Corolla wild horses</span><span>[X min drive]</span></li>
+        </ul>
+      </div>
+      <!-- EDIT: Google Maps → search your town or neighborhood → Share → Embed a map → copy the src URL here.
+           Tip: use the neighborhood, not the exact address, until a guest has booked. -->
+      <iframe src="https://maps.google.com/maps?q=Nags%20Head%2C%20NC&z=12&output=embed" loading="lazy" title="Map of the area"></iframe>
+    </div>
+  </section>
+
+  <section id="inquire" class="inquire-section">
+    <div class="wrap inquire">
+      <div>
+        <div class="eyebrow">Book your week</div>
+        <h2>Send an inquiry</h2>
+        <p style="color:var(--muted)">Tell us which week you're interested in and a little about your group. We usually reply within [24 hours].</p>
+        <p style="color:var(--muted)">Prefer to talk? Call or text <a href="tel:+10000000000">[(000) 000-0000]</a>.</p>
+      </div>
+      <form id="inquiry-form">
+        <div><label for="name">Name</label><input id="name" name="name" required autocomplete="name"></div>
+        <div><label for="email">Email</label><input id="email" name="email" type="email" required autocomplete="email"></div>
+        <div class="full"><label for="week">Week</label><select id="week" name="week" required></select></div>
+        <div><label for="adults">Adults</label><input id="adults" name="adults" type="number" min="1" value="2"></div>
+        <div><label for="kids">Children</label><input id="kids" name="kids" type="number" min="0" value="0"></div>
+        <div class="full"><label for="message">Anything else?</label><textarea id="message" name="message" placeholder="Pets, questions, flexible dates…"></textarea></div>
+        <div class="full"><button class="btn" type="submit">Send inquiry</button></div>
+        <p class="form-msg" id="form-msg" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <span>© <span class="this-year"></span> [Property Name] · [Town], NC</span>
+      <span>[Optional: also listed on VRBO / Airbnb — link here]</span>
+    </div>
+  </footer>
+
+  <div class="lightbox" id="lightbox"><img alt=""></div>
+
+  <script>
+    // ============================================================
+    // EDIT THIS BLOCK each season. Everything else updates itself.
+    // ============================================================
+    const CONFIG = {
+      ownerEmail: "you@example.com",   // inquiries are emailed here
+      seasonStart: "2027-05-29",        // first Saturday check-in
+      seasonEnd:   "2027-08-28",        // last Saturday check-out
+      // Weekly rate by check-in date. Each tier applies from its date until the next tier starts.
+      // EXAMPLE NUMBERS — replace with your real rates before publishing.
+      rateTiers: [
+        { from: "2027-05-29", label: "Early season", rate: 2400 },
+        { from: "2027-06-12", label: "Peak",         rate: 3600 },
+        { from: "2027-08-14", label: "Late season",  rate: 2800 },
+      ],
+      // Check-in dates of weeks that are already taken
+      booked: ["2027-06-26", "2027-07-03"],
+    };
+    // ============================================================
+
+    const fmtDay = d => d.toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "UTC" });
+    const money = n => "$" + n.toLocaleString("en-US");
+    const iso = d => d.toISOString().slice(0, 10);
+
+    function buildWeeks() {
+      const weeks = [];
+      const end = new Date(CONFIG.seasonEnd + "T00:00:00Z");
+      for (let d = new Date(CONFIG.seasonStart + "T00:00:00Z"); d < end; d.setUTCDate(d.getUTCDate() + 7)) {
+        const start = new Date(d);
+        const stop = new Date(d); stop.setUTCDate(stop.getUTCDate() + 7);
+        const tier = [...CONFIG.rateTiers].reverse().find(t => iso(start) >= t.from) || CONFIG.rateTiers[0];
+        weeks.push({
+          id: iso(start),
+          label: `${fmtDay(start)} – ${fmtDay(stop)}`,
+          tier: tier.label,
+          rate: tier.rate,
+          booked: CONFIG.booked.includes(iso(start)),
+        });
+      }
+      return weeks;
+    }
+
+    const weeks = buildWeeks();
+    const grid = document.getElementById("weeks");
+    const select = document.getElementById("week");
+    select.innerHTML = `<option value="">Choose a week…</option>`;
+
+    for (const w of weeks) {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "week" + (w.booked ? " booked" : "");
+      btn.disabled = w.booked;
+      btn.innerHTML = `<div class="tier">${w.booked ? "Booked" : w.tier}</div>
+        <div class="dates">${w.label}</div>
+        <div class="price">${w.booked ? "—" : money(w.rate) + "<small style='font-size:.6em'> /wk</small>"}</div>`;
+      btn.addEventListener("click", () => {
+        select.value = w.id;
+        document.getElementById("inquire").scrollIntoView();
+        document.getElementById("name").focus({ preventScroll: true });
+      });
+      grid.appendChild(btn);
+
+      if (!w.booked) {
+        const opt = document.createElement("option");
+        opt.value = w.id;
+        opt.textContent = `${w.label} · ${money(w.rate)}`;
+        select.appendChild(opt);
+      }
+    }
+    select.insertAdjacentHTML("beforeend", `<option value="flexible">I'm flexible — suggest a week</option>`);
+
+    document.querySelector(".season-year").textContent = CONFIG.seasonStart.slice(0, 4);
+    document.querySelector(".this-year").textContent = new Date().getFullYear();
+
+    // Inquiry form: opens the guest's email app with everything filled in.
+    // To receive submissions without email apps, swap this for a form service such as Formspree.
+    document.getElementById("inquiry-form").addEventListener("submit", e => {
+      e.preventDefault();
+      const f = e.target;
+      const week = f.week.options[f.week.selectedIndex].textContent;
+      const body = [
+        `Name: ${f.name.value}`,
+        `Email: ${f.email.value}`,
+        `Week: ${week}`,
+        `Guests: ${f.adults.value} adults, ${f.kids.value} children`,
+        "",
+        f.message.value,
+      ].join("\n");
+      window.location.href = `mailto:${CONFIG.ownerEmail}?subject=${encodeURIComponent("Rental inquiry: " + week)}&body=${encodeURIComponent(body)}`;
+      document.getElementById("form-msg").textContent = "Your email app should open with the inquiry ready to send.";
+    });
+
+    // Gallery: placeholder for missing photos, lightbox for real ones
+    const lightbox = document.getElementById("lightbox");
+    document.querySelectorAll(".gallery figure").forEach(fig => {
+      const img = fig.querySelector("img");
+      const markMissing = () => {
+        fig.classList.add("missing");
+        fig.querySelector("figcaption").textContent = `Add ${img.getAttribute("src")}`;
+      };
+      img.addEventListener("error", markMissing);
+      if (img.complete && img.naturalWidth === 0) markMissing();
+      fig.addEventListener("click", () => {
+        if (fig.classList.contains("missing")) return;
+        lightbox.querySelector("img").src = img.src;
+        lightbox.querySelector("img").alt = img.alt;
+        lightbox.classList.add("open");
+      });
+    });
+    lightbox.addEventListener("click", () => lightbox.classList.remove("open"));
+    document.addEventListener("keydown", e => { if (e.key === "Escape") lightbox.classList.remove("open"); });
+  </script>
+</body>
+</html>
