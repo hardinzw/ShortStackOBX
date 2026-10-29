@@ -4,7 +4,8 @@ CREATE TABLE bookings (
   week_start        TEXT NOT NULL,         -- check-in Saturday, YYYY-MM-DD
   week_end          TEXT NOT NULL,         -- check-out Saturday
   -- hold: guest is on the Stripe page | pending: bank payment settling | paid
-  -- expired / released / failed: never paid | cancelled: fully refunded | conflict: needs a refund
+  -- expired / released / failed: never paid | cancelled: fully refunded
+  -- conflict: paid for a week that was already taken; refunded automatically
   status            TEXT NOT NULL,
   adults            INTEGER,
   kids              INTEGER,

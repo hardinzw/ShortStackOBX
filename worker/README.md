@@ -14,6 +14,8 @@ How a booking works:
    appears in `/calendar.ics`, which Vrbo and Houfy import to block the week there.
 4. If the guest backs out, the hold is released straight away (otherwise after 30 minutes).
 5. To cancel, give a **full refund** in the Stripe dashboard: the week reopens automatically.
+6. If a payment arrives for a week that was taken in the meantime (a Vrbo booking during the
+   30-minute hold, say), it's refunded automatically and logged as `DOUBLE BOOKING`.
 
 Rates, season dates, tax, guest limit, Venmo handle and hand-entered bookings are all in
 `../site-config.json`, which the website also reads.
@@ -29,7 +31,7 @@ Needs [Node.js LTS](https://nodejs.org) and the [Stripe CLI](https://docs.stripe
 ```sh
 cd worker
 npm install
-cp .dev.vars.example .dev.vars    # then paste your sk_test_ key into .dev.vars
+cp .dev.vars.example .dev.vars    # then paste your rk_test_ key into .dev.vars
 npm run db:local                  # create the local bookings table
 npm run dev                       # website + server at http://localhost:8787
 ```
@@ -49,14 +51,17 @@ with test card `4242 4242 4242 4242`, any future date and any CVC.
 1. **Cloudflare**: create a free account, then in `worker/` run `npx wrangler login` and
    `npx wrangler d1 create shortstack-bookings`. Paste the `database_id` it prints into
    `wrangler.toml`.
-2. **Secrets**: run `npx wrangler secret put STRIPE_SECRET_KEY` (and `VRBO_ICAL_URL`,
-   `HOUFY_ICAL_URL`). Use your test key first; switch to the live `sk_live_` key when ready.
+2. **Secrets**: in Stripe, create a restricted key (Developers > API keys > Create restricted key)
+   with only **Checkout Sessions: Write** and **Refunds: Write**. Save it with
+   `npx wrangler secret put STRIPE_SECRET_KEY` (and `VRBO_ICAL_URL`, `HOUFY_ICAL_URL`). Use a
+   sandbox (test) key first; make a matching live `rk_live_` key when ready.
 3. **Deploy**: `npm run db:remote` then `npm run deploy`. Note the address it prints,
    e.g. `https://shortstack-booking.<you>.workers.dev`.
 4. **Stripe webhook**: Stripe dashboard > Developers > Webhooks > Add endpoint:
    `https://shortstack-booking.<you>.workers.dev/api/stripe-webhook`, with events
    `checkout.session.completed`, `checkout.session.async_payment_succeeded`,
-   `checkout.session.async_payment_failed`, `checkout.session.expired` and `charge.refunded`.
+   `checkout.session.async_payment_failed`, `checkout.session.expired` and `charge.refunded`,
+   and API version `2026-09-30.endive` (the version `src/index.js` uses).
    Save its signing secret with `npx wrangler secret put STRIPE_WEBHOOK_SECRET`.
 5. **Stripe settings**: turn on customer email receipts and your own "successful payment"
    emails (Settings > Emails), and check which payment methods are on (Settings > Payment
