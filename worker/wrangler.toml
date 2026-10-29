@@ -1,6 +1,14 @@
 name = "shortstack-booking"
 main = "src/index.js"
 compatibility_date = "2026-10-01"
+# Keep the shortstack-booking.<account>.workers.dev address too (the sandbox Stripe webhook uses it)
+workers_dev = true
+
+# The site's own domain. Cloudflare creates the DNS records and HTTPS certificate itself.
+routes = [
+  { pattern = "shortstackobx.com", custom_domain = true },
+  { pattern = "www.shortstackobx.com", custom_domain = true },
+]
 
 # The website: Cloudflare serves these files, and sends every other request to src/index.js
 [assets]
