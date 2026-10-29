@@ -1,11 +1,11 @@
-# Makes web-sized copies of the photos in images/ and saves them to images/web/.
+# Makes web-sized copies of the photos in public/images/ and saves them to public/images/web/.
 # Full-size camera photos (8000+ px) look grainy when the browser shrinks them down,
 # so the page should use these copies instead. Re-run after adding new photos:
 #   powershell -File resize-images.ps1
 param([int]$MaxWidth = 2048, [int]$Quality = 85)
 
 Add-Type -AssemblyName System.Drawing
-$src = Join-Path $PSScriptRoot "images"
+$src = Join-Path $PSScriptRoot "public\images"
 $out = Join-Path $src "web"
 New-Item -ItemType Directory -Force $out | Out-Null
 

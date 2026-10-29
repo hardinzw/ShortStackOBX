@@ -1,0 +1,25 @@
+# Publishes the website (public/) and booking server (worker/) to Cloudflare on every push
+# that changes them or site-config.json. Run it by hand from Actions > Deploy site > Run workflow.
+# Setup: add CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID repository secrets, then set the
+# repository variable BOOKING_SERVER_ENABLED to "true" (Settings > Secrets and variables > Actions).
+name: Deploy site
+
+on:
+  push:
+    branches: [main]
+    paths: ["public/**", "worker/**", "site-config.json", ".github/workflows/deploy.yml"]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    if: vars.BOOKING_SERVER_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: worker
+          preCommands: npx wrangler d1 migrations apply shortstack-bookings --remote
+          command: deploy

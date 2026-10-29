@@ -1,0 +1,7 @@
+# Copy this file to .dev.vars (same folder) and fill in your TEST keys.
+# .dev.vars is never uploaded to GitHub.
+STRIPE_SECRET_KEY=sk_test_...
+# Printed by `stripe listen` when testing locally
+STRIPE_WEBHOOK_SECRET=whsec_...
+VRBO_ICAL_URL=
+HOUFY_ICAL_URL=

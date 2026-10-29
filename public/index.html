@@ -107,9 +107,49 @@
       .gallery figure.wide { grid-column: span 2; }
       .gallery figure.tall { grid-row: span 1; }
     }
-    .lightbox { position: fixed; inset: 0; background: rgba(20,33,61,.94); display: none; place-items: center; z-index: 50; padding: 20px; cursor: zoom-out; }
+    .gallery-more { margin-top: 24px; text-align: center; }
+    .btn.outline { background: transparent; color: var(--sea); box-shadow: inset 0 0 0 2px var(--sea); }
+    .btn.outline:hover { background: var(--sea); color: var(--white); }
+
+    /* All-photos viewer */
+    body.no-scroll { overflow: hidden; }
+    .photo-viewer { position: fixed; inset: 0; z-index: 40; background: var(--white); overflow-y: auto; display: none; }
+    .photo-viewer.open { display: block; }
+    .photo-viewer header { position: sticky; top: 0; z-index: 1; background: rgba(255,255,255,.95); backdrop-filter: blur(8px); border-bottom: 1px solid var(--sand-deep); }
+    .photo-viewer header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 64px; }
+    .photo-viewer header h2 { font-size: 1.4rem; margin: 0; }
+    .viewer-nav { display: flex; gap: 8px; flex-wrap: wrap; padding: 0 20px 12px; max-width: var(--max); margin: 0 auto; }
+    .viewer-nav a { font-size: .85rem; font-weight: 500; text-decoration: none; padding: 4px 12px; border-radius: 999px; background: var(--sand); color: var(--ink); }
+    .viewer-nav a:hover { background: var(--sand-deep); }
+    .viewer-close { border: 0; background: var(--sand); color: var(--ink); width: 40px; height: 40px; border-radius: 50%; font-size: 1.4rem; line-height: 1; cursor: pointer; flex-shrink: 0; }
+    .viewer-close:hover { background: var(--sand-deep); }
+    .viewer-group { padding: 32px 0 8px; scroll-margin-top: 130px; }
+    .viewer-group:last-child { padding-bottom: 48px; }
+    .viewer-group h3 { font-size: 1.25rem; }
+    .viewer-group h3 small { font-family: "Inter", sans-serif; font-weight: 500; font-size: .85rem; color: var(--muted); margin-left: 8px; }
+    .viewer-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+    .viewer-grid button { padding: 0; border: 0; border-radius: var(--radius); overflow: hidden; aspect-ratio: 4 / 3; background: var(--sand-deep); cursor: zoom-in; }
+    .viewer-grid img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
+    .viewer-grid button:hover img { transform: scale(1.04); }
+    @media (max-width: 520px) { .viewer-grid { grid-template-columns: 1fr 1fr; gap: 8px; } }
+
+    .lightbox { position: fixed; inset: 0; background: rgba(20,33,61,.94); display: none; place-items: center; z-index: 50; padding: 20px 72px; cursor: zoom-out; }
     .lightbox.open { display: grid; }
-    .lightbox img { max-height: 90vh; border-radius: 8px; }
+    .lightbox figure { margin: 0; display: grid; justify-items: center; gap: 10px; }
+    .lightbox img { max-height: 84vh; border-radius: 8px; cursor: default; }
+    .lightbox figcaption { color: var(--white); font-size: .95rem; opacity: .9; }
+    .lb-btn {
+      position: fixed; top: 50%; transform: translateY(-50%); width: 48px; height: 48px; border-radius: 50%; border: 0;
+      background: rgba(255,255,255,.15); color: var(--white); font-size: 1.8rem; line-height: 1; cursor: pointer;
+    }
+    .lb-btn:hover { background: rgba(255,255,255,.3); }
+    .lb-prev { left: 16px; }
+    .lb-next { right: 16px; }
+    .lb-close { top: 16px; right: 16px; transform: none; width: 40px; height: 40px; font-size: 1.4rem; }
+    @media (max-width: 520px) {
+      .lightbox { padding: 20px 8px; }
+      .lb-prev, .lb-next { top: auto; bottom: 16px; transform: none; }
+    }
 
     /* Amenities */
     .amenities { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 28px; margin-top: 32px; }
@@ -138,6 +178,23 @@
     .week.booked { background: rgba(255,255,255,.12); color: rgba(255,255,255,.6); cursor: not-allowed; }
     .week.booked:hover { border-color: transparent; transform: none; }
     .week.booked .price, .week.booked .tier { color: rgba(255,255,255,.6); }
+    .booking-banner { background: var(--white); color: var(--sea-dark); border-left: 4px solid var(--sun); border-radius: 10px; padding: 14px 18px; font-weight: 500; max-width: 70ch; }
+
+    /* Booking dialog */
+    .book-dialog { border: 0; border-radius: var(--radius); padding: 0; width: min(440px, calc(100vw - 32px)); color: var(--ink); box-shadow: 0 20px 60px rgba(20,33,61,.35); }
+    .book-dialog::backdrop { background: rgba(20,33,61,.6); }
+    .book-form { padding: 28px; display: grid; grid-template-columns: 1fr; gap: 16px; position: relative; }
+    .book-form h3 { font-size: 1.5rem; margin: 0; }
+    .book-form .eyebrow { margin: 0; }
+    .dialog-close { position: absolute; top: 12px; right: 12px; border: 0; background: var(--sand); color: var(--ink); width: 36px; height: 36px; border-radius: 50%; font-size: 1.3rem; line-height: 1; cursor: pointer; }
+    .book-total { margin: 0; display: grid; grid-template-columns: 1fr auto; row-gap: 6px; }
+    .book-total dt { color: var(--muted); }
+    .book-total dd { margin: 0; padding-left: 16px; text-align: right; }
+    .book-total .total { font-weight: 600; color: var(--ink); border-top: 1px solid var(--sand-deep); padding-top: 6px; }
+    .book-guests { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .book-form .btn:disabled { opacity: .6; cursor: wait; transform: none; }
+    .book-msg { margin: 0; min-height: 1.4em; color: var(--sun-hover); font-weight: 500; }
+    .book-fine, .book-alt { margin: 0; font-size: .85rem; color: var(--muted); }
     .policies { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 40px; }
     .policies div { border-top: 2px solid var(--sun); padding-top: 12px; font-size: .95rem; opacity: .92; }
     .policies strong { display: block; margin-bottom: 4px; }
@@ -226,7 +283,7 @@
     <div class="wrap">
       <div class="eyebrow">Photos</div>
       <h2>Take a look around</h2>
-      <!-- EDIT: put your photos in the images/ folder with these names (or change the src values).
+      <!-- EDIT: put your photos in the public/images/ folder with these names (or change the src values).
            Use the resized copies in images/web/ (made by resize-images.ps1); full-size camera photos look grainy here.
            Any photo that's missing shows a striped placeholder instead. -->
       <div class="gallery">
@@ -235,9 +292,10 @@
         <figure><img src="images/KitchenMain.avif" alt="Kitchen"><figcaption>Kitchen</figcaption></figure>
         <figure class="wide"><img src="images/FrontDeck1.1.avif" alt="Deck with view"><figcaption>Deck</figcaption></figure>
         <figure><img src="images/KingRoom1.1.avif" alt="Primary bedroom"><figcaption>Primary bedroom</figcaption></figure>
-        <figure><img src="images/CommunityPool.avif" alt="Pool"><figcaption>Pool</figcaption></figure>
-        <figure class="wide"><img src="images/Sunset.avif" alt="The beach nearby"><figcaption>The beach</figcaption></figure>
+        <figure><img src="images/CommunityPool.avif" alt="Pool"><figcaption>Community Pool</figcaption></figure>
+        <figure class="wide"><img src="images/Aerial.avif" alt="The beach nearby"><figcaption>Aerial View</figcaption></figure>
       </div>
+      <div class="gallery-more"><button type="button" class="btn outline" id="view-all-photos">View all photos</button></div>
     </div>
   </section>
 
@@ -294,13 +352,14 @@
     <div class="wrap">
       <div class="eyebrow">Summer <span class="season-year"></span></div>
       <h2>Rates &amp; availability</h2>
-      <p class="note">Summer stays are weekly, Saturday to Saturday. Tap an open week to start an inquiry. Rates shown are before taxes and fees.</p>
+      <p class="note">Summer stays are weekly, Saturday to Saturday. Tap an open week to book it or send an inquiry. Rates shown are before taxes.</p>
+      <p class="booking-banner" id="booking-banner" role="status" hidden></p>
       <div class="legend"><span class="l-open">Available</span><span class="l-booked">Booked</span></div>
       <div class="weeks" id="weeks"></div>
       <div class="policies">
         <!-- EDIT: your actual policies -->
         <div><strong>Check-in / out</strong>[4:00 PM] / [10:00 AM] Saturday</div>
-        <div><strong>Deposit</strong>[50% to reserve, balance due 30 days before arrival]</div>
+        <div><strong>Payment</strong>Full payment at booking by card, Apple Pay or Google Pay<span class="venmo-policy"></span></div>
         <div><strong>Cancellation</strong>[Your cancellation policy]</div>
         <div><strong>House rules</strong>[No smoking · Pets with approval · Min. renter age 25]</div>
       </div>
@@ -357,33 +416,52 @@
     </div>
   </footer>
 
-  <div class="lightbox" id="lightbox"><img alt=""></div>
+  <dialog class="book-dialog" id="book-dialog" aria-labelledby="book-title">
+    <form class="book-form" id="book-form">
+      <button type="button" class="dialog-close" aria-label="Close">&times;</button>
+      <div class="eyebrow">Book this week</div>
+      <h3 id="book-title"></h3>
+      <dl class="book-total"></dl>
+      <div class="book-guests">
+        <div><label for="book-adults">Adults</label><input id="book-adults" type="number" min="1" value="2" required autofocus></div>
+        <div><label for="book-kids">Children</label><input id="book-kids" type="number" min="0" value="0"></div>
+      </div>
+      <button class="btn" type="submit">Book &amp; pay securely</button>
+      <p class="book-msg" aria-live="polite"></p>
+      <p class="book-fine">Payment is handled by Stripe: card, Apple Pay or Google Pay. We never see your card details. Full payment is due at booking.</p>
+      <p class="book-alt"><span class="venmo-note"></span><a href="#inquire" class="book-inquire">Have questions first? Send an inquiry.</a></p>
+    </form>
+  </dialog>
+
+  <div class="photo-viewer" id="photo-viewer" role="dialog" aria-modal="true" aria-labelledby="photo-viewer-title">
+    <header>
+      <div class="wrap">
+        <h2 id="photo-viewer-title">All photos</h2>
+        <button type="button" class="viewer-close" aria-label="Close photos">&times;</button>
+      </div>
+      <div class="viewer-nav" aria-label="Photo sections"></div>
+    </header>
+    <div class="wrap viewer-body"></div>
+  </div>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo">
+    <figure><img alt=""><figcaption></figcaption></figure>
+    <button type="button" class="lb-btn lb-prev" aria-label="Previous photo">&lsaquo;</button>
+    <button type="button" class="lb-btn lb-next" aria-label="Next photo">&rsaquo;</button>
+    <button type="button" class="lb-btn lb-close" aria-label="Close">&times;</button>
+  </div>
 
   <script>
-    // ============================================================
-    // EDIT THIS BLOCK each season. Everything else updates itself.
-    // ============================================================
-    const CONFIG = {
-      ownerEmail: "you@example.com",   // inquiries are emailed here
-      seasonStart: "2027-05-29",        // first Saturday check-in
-      seasonEnd:   "2027-08-28",        // last Saturday check-out
-      // Weekly rate by check-in date. Each tier applies from its date until the next tier starts.
-      // EXAMPLE NUMBERS — replace with your real rates before publishing.
-      rateTiers: [
-        { from: "2027-05-29", label: "Early season", rate: 2400 },
-        { from: "2027-06-12", label: "Peak",         rate: 3600 },
-        { from: "2027-08-14", label: "Late season",  rate: 2800 },
-      ],
-      // Check-in dates of weeks that are already taken
-      booked: ["2027-06-26", "2027-07-03"],
-    };
-    // ============================================================
+    // Season dates, rates and booking settings live in site-config.json, which the
+    // booking server also reads. Edit that file each season, not this script.
+    let CONFIG = null;
 
     const fmtDay = d => d.toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "UTC" });
-    const money = n => "$" + n.toLocaleString("en-US");
+    const money = n => "$" + n.toLocaleString("en-US", { minimumFractionDigits: n % 1 ? 2 : 0, maximumFractionDigits: 2 });
     const iso = d => d.toISOString().slice(0, 10);
 
-    function buildWeeks() {
+    // bookedRanges: [{ start, end }]; end is the checkout day (not a booked night)
+    function buildWeeks(bookedRanges) {
       const weeks = [];
       const end = new Date(CONFIG.seasonEnd + "T00:00:00Z");
       for (let d = new Date(CONFIG.seasonStart + "T00:00:00Z"); d < end; d.setUTCDate(d.getUTCDate() + 7)) {
@@ -395,42 +473,151 @@
           label: `${fmtDay(start)} – ${fmtDay(stop)}`,
           tier: tier.label,
           rate: tier.rate,
-          booked: CONFIG.booked.includes(iso(start)),
+          // Any booked night inside the week makes the whole week unavailable
+          booked: CONFIG.booked.includes(iso(start)) ||
+            bookedRanges.some(r => r.start < iso(stop) && r.end > iso(start)),
         });
       }
       return weeks;
     }
 
-    const weeks = buildWeeks();
     const grid = document.getElementById("weeks");
     const select = document.getElementById("week");
-    select.innerHTML = `<option value="">Choose a week…</option>`;
 
-    for (const w of weeks) {
-      const btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "week" + (w.booked ? " booked" : "");
-      btn.disabled = w.booked;
-      btn.innerHTML = `<div class="tier">${w.booked ? "Booked" : w.tier}</div>
-        <div class="dates">${w.label}</div>
-        <div class="price">${w.booked ? "—" : money(w.rate) + "<small style='font-size:.6em'> /wk</small>"}</div>`;
-      btn.addEventListener("click", () => {
-        select.value = w.id;
-        document.getElementById("inquire").scrollIntoView();
-        document.getElementById("name").focus({ preventScroll: true });
+    const getJSON = (url, opts) => fetch(url, { cache: "no-cache", ...opts })
+      .then(r => r.json().then(data => r.ok ? data : Promise.reject(new Error(data.error || r.status))));
+    // The booking server (worker/) serves this page, so its /api routes are on the same site
+    const onlineBooking = () => CONFIG.onlineBooking === true;
+
+    // Booked dates (online bookings, site-config.json and the Vrbo / Houfy calendars) come
+    // from the booking server; if it can't be reached, only site-config.json's weeks show
+    getJSON("/site-config.json")
+      .then(async config => {
+        CONFIG = config;
+        document.querySelector(".season-year").textContent = CONFIG.seasonStart.slice(0, 4);
+        if (CONFIG.venmoHandle) {
+          document.querySelector(".venmo-policy").textContent = `; Venmo (${CONFIG.venmoHandle}) by arrangement`;
+        }
+        await handleReturnFromCheckout();
+        renderWeeks(await getJSON("/api/booked").then(d => d.booked).catch(() => []));
+      })
+      .catch(() => {
+        grid.innerHTML = `<p>Rates couldn't be loaded right now. Please send us an inquiry below.</p>`;
       });
-      grid.appendChild(btn);
 
-      if (!w.booked) {
-        const opt = document.createElement("option");
-        opt.value = w.id;
-        opt.textContent = `${w.label} · ${money(w.rate)}`;
-        select.appendChild(opt);
-      }
+    function startInquiry(weekId) {
+      select.value = weekId;
+      document.getElementById("inquire").scrollIntoView();
+      document.getElementById("name").focus({ preventScroll: true });
     }
-    select.insertAdjacentHTML("beforeend", `<option value="flexible">I'm flexible — suggest a week</option>`);
 
-    document.querySelector(".season-year").textContent = CONFIG.seasonStart.slice(0, 4);
+    function renderWeeks(bookedRanges) {
+      select.innerHTML = `<option value="">Choose a week…</option>`;
+
+      for (const w of buildWeeks(bookedRanges)) {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "week" + (w.booked ? " booked" : "");
+        btn.disabled = w.booked;
+        btn.innerHTML = `<div class="tier">${w.booked ? "Booked" : w.tier}</div>
+          <div class="dates">${w.label}</div>
+          <div class="price">${w.booked ? "—" : money(w.rate) + "<small style='font-size:.6em'> /wk</small>"}</div>`;
+        btn.addEventListener("click", () => onlineBooking() ? openBooking(w) : startInquiry(w.id));
+        grid.appendChild(btn);
+
+        if (!w.booked) {
+          const opt = document.createElement("option");
+          opt.value = w.id;
+          opt.textContent = `${w.label} · ${money(w.rate)}`;
+          select.appendChild(opt);
+        }
+      }
+      select.insertAdjacentHTML("beforeend", `<option value="flexible">I'm flexible — suggest a week</option>`);
+    }
+
+    // Booking: the dialog collects guest counts, then the booking server opens Stripe's checkout page
+    const bookDialog = document.getElementById("book-dialog");
+    const bookForm = document.getElementById("book-form");
+    const bookMsg = bookForm.querySelector(".book-msg");
+    const bookBtn = bookForm.querySelector("button[type=submit]");
+    let bookingWeek = null;
+
+    function openBooking(w) {
+      bookingWeek = w;
+      const tax = Math.round(w.rate * (CONFIG.taxPercent || 0)) / 100;
+      document.getElementById("book-title").textContent = w.label;
+      bookForm.querySelector(".book-total").innerHTML = tax
+        ? `<dt>${w.tier} week</dt><dd>${money(w.rate)}</dd>
+           <dt>Sales &amp; occupancy tax (${CONFIG.taxPercent}%)</dt><dd>${money(tax)}</dd>
+           <dt class="total">Total</dt><dd class="total">${money(w.rate + tax)}</dd>`
+        : `<dt class="total">${w.tier} week</dt><dd class="total">${money(w.rate)}</dd>`;
+      if (CONFIG.maxGuests) {
+        document.getElementById("book-adults").max = CONFIG.maxGuests;
+        document.getElementById("book-kids").max = CONFIG.maxGuests - 1;
+      }
+      bookForm.querySelector(".venmo-note").textContent = CONFIG.venmoHandle
+        ? `Prefer Venmo? We accept Venmo (${CONFIG.venmoHandle}) once we've confirmed your week. ` : "";
+      bookMsg.textContent = "";
+      bookBtn.disabled = false;
+      bookDialog.showModal();
+    }
+
+    bookForm.querySelector(".dialog-close").addEventListener("click", () => bookDialog.close());
+    bookDialog.addEventListener("click", e => { if (e.target === bookDialog) bookDialog.close(); });
+    bookForm.querySelector(".book-inquire").addEventListener("click", e => {
+      e.preventDefault();
+      bookDialog.close();
+      startInquiry(bookingWeek.id);
+    });
+
+    bookForm.addEventListener("submit", async e => {
+      e.preventDefault();
+      const adults = +document.getElementById("book-adults").value;
+      const kids = +document.getElementById("book-kids").value || 0;
+      if (CONFIG.maxGuests && adults + kids > CONFIG.maxGuests) {
+        bookMsg.textContent = `The house sleeps up to ${CONFIG.maxGuests} guests.`;
+        return;
+      }
+      bookBtn.disabled = true;
+      bookMsg.textContent = "Opening secure checkout…";
+      try {
+        const { url } = await getJSON("/api/checkout", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ weekStart: bookingWeek.id, adults, kids, returnUrl: location.origin + location.pathname }),
+        });
+        location.href = url;
+      } catch (err) {
+        bookMsg.textContent = err instanceof TypeError
+          ? "We couldn't reach the booking system. Please try again, or send us an inquiry."
+          : err.message;
+        bookBtn.disabled = false;
+      }
+    });
+
+    // Stripe sends guests back here with ?booking=success or ?booking=cancelled&hold=…
+    async function handleReturnFromCheckout() {
+      const params = new URLSearchParams(location.search);
+      const result = params.get("booking");
+      if (!result) return;
+      const banner = document.getElementById("booking-banner");
+      if (result === "success") {
+        banner.textContent = "You're booked, thank you! Stripe has emailed your receipt, and we'll be in touch with check-in details.";
+      } else {
+        banner.textContent = "Checkout was cancelled, so nothing was charged and the week wasn't booked.";
+        // Free the week right away instead of waiting for the 30-minute hold to lapse
+        if (params.get("hold")) {
+          await getJSON("/api/release", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ hold: params.get("hold") }),
+          }).catch(() => {});
+        }
+      }
+      banner.hidden = false;
+      history.replaceState(null, "", location.pathname + location.hash);
+    }
+
     document.querySelector(".this-year").textContent = new Date().getFullYear();
 
     // Inquiry form: opens the guest's email app with everything filled in.
@@ -447,12 +634,110 @@
         "",
         f.message.value,
       ].join("\n");
-      window.location.href = `mailto:${CONFIG.ownerEmail}?subject=${encodeURIComponent("Rental inquiry: " + week)}&body=${encodeURIComponent(body)}`;
+      window.location.href = `mailto:${CONFIG?.ownerEmail || ""}?subject=${encodeURIComponent("Rental inquiry: " + week)}&body=${encodeURIComponent(body)}`;
       document.getElementById("form-msg").textContent = "Your email app should open with the inquiry ready to send.";
     });
 
-    // Gallery: placeholder for missing photos, lightbox for real ones
+    // ============================================================
+    // ALL PHOTOS: shown in the "View all photos" viewer, grouped by area.
+    // To add one, put it in images/ and add its file name (no .avif) to a group.
+    // ============================================================
+    const PHOTOS = [
+      { area: "Exterior & Views", files: ["AerialFront", "Aerial", "Sunset"] },
+      { area: "Living, Dining & Kitchen", files: ["LivingRoom1", "LivingRoom2", "DiningRoom1", "KitchenMain", "KitchenMain2"] },
+      { area: "Bedrooms & baths", files: ["KingRoom1.1", "KingRoom1.2", "KingRoom2.1", "KingRoom2.2", "KingRoom2FullBath",
+                                          "BasementRoom1.1", "BasementRoom1.2", "BasementFullBath", "BunkRoom1.1", "BunkRoom1.2", "HallwayFullBath"] },
+      { area: "Basement",         files: ["Basement1.1", "Basement1.4", "Basement1.5", "Basement1.7", "Basement1.8", "Basement1.9", "Basement1.10"] },
+      { area: "Decks & outdoors", files: ["FrontDeck1.1", "FrontDeck1.2", "FrontDeck1.3", "TopDeck", "BottomDeck1.1", "OutsideShower"] },
+      { area: "Amenities",        files: ["Amennities1.1", "Amennities1.2", "Amennities1.3", "Amennities1.4", "Amennities1.5", "Amennities1.6"] },
+      { area: "Community",        files: ["CommunityPool", "CommunityPlayground", "CommunityBasketballGoal", "YMCAPoolAccess"] },
+    ];
+    // ============================================================
+
+    const allPhotos = PHOTOS.flatMap(g => g.files.map(f => ({ src: `images/${f}.avif`, area: g.area })));
+    const viewer = document.getElementById("photo-viewer");
     const lightbox = document.getElementById("lightbox");
+    const lbImg = lightbox.querySelector("img");
+    const lbCaption = lightbox.querySelector("figcaption");
+    let lbIndex = 0;
+
+    // Lightbox: arrows step through every photo, wherever it was opened from
+    function showPhoto(i) {
+      lbIndex = (i + allPhotos.length) % allPhotos.length;
+      const p = allPhotos[lbIndex];
+      lbImg.src = p.src;
+      lbImg.alt = p.area;
+      lbCaption.textContent = `${p.area} · ${lbIndex + 1} of ${allPhotos.length}`;
+    }
+    function openLightbox(src) {
+      const i = allPhotos.findIndex(p => p.src === src);
+      if (i === -1) { lbImg.src = src; lbImg.alt = ""; lbCaption.textContent = ""; }  // featured photo not in PHOTOS
+      else showPhoto(i);
+      lightbox.classList.add("open");
+      document.body.classList.add("no-scroll");
+    }
+    function closeLightbox() {
+      lightbox.classList.remove("open");
+      if (!viewer.classList.contains("open")) document.body.classList.remove("no-scroll");
+    }
+    lightbox.addEventListener("click", e => { if (e.target === lightbox || e.target.closest(".lb-close")) closeLightbox(); });
+    lightbox.querySelector(".lb-prev").addEventListener("click", () => showPhoto(lbIndex - 1));
+    lightbox.querySelector(".lb-next").addEventListener("click", () => showPhoto(lbIndex + 1));
+
+    // All-photos viewer: one section per area, with jump links at the top
+    const viewerBody = viewer.querySelector(".viewer-body");
+    const viewerNav = viewer.querySelector(".viewer-nav");
+    const viewAllBtn = document.getElementById("view-all-photos");
+    viewAllBtn.textContent = `View all ${allPhotos.length} photos`;
+
+    PHOTOS.forEach((g, gi) => {
+      const section = document.createElement("section");
+      section.className = "viewer-group";
+      section.innerHTML = `<h3>${g.area}<small>${g.files.length} photo${g.files.length === 1 ? "" : "s"}</small></h3><div class="viewer-grid"></div>`;
+      const grid = section.querySelector(".viewer-grid");
+      for (const f of g.files) {
+        const src = `images/${f}.avif`;
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.setAttribute("aria-label", `Open ${g.area} photo`);
+        btn.innerHTML = `<img src="${src}" alt="${g.area}" loading="lazy" decoding="async">`;
+        btn.addEventListener("click", () => openLightbox(src));
+        grid.appendChild(btn);
+      }
+      viewerBody.appendChild(section);
+
+      const link = document.createElement("a");
+      link.href = "#";
+      link.textContent = g.area;
+      link.addEventListener("click", e => { e.preventDefault(); section.scrollIntoView({ behavior: "smooth" }); });
+      viewerNav.appendChild(link);
+    });
+
+    function openViewer() {
+      viewer.classList.add("open");
+      viewer.scrollTop = 0;
+      document.body.classList.add("no-scroll");
+      viewer.querySelector(".viewer-close").focus();
+    }
+    function closeViewer() {
+      viewer.classList.remove("open");
+      document.body.classList.remove("no-scroll");
+      viewAllBtn.focus();
+    }
+    viewAllBtn.addEventListener("click", openViewer);
+    viewer.querySelector(".viewer-close").addEventListener("click", closeViewer);
+
+    document.addEventListener("keydown", e => {
+      if (lightbox.classList.contains("open")) {
+        if (e.key === "Escape") closeLightbox();
+        else if (e.key === "ArrowLeft") showPhoto(lbIndex - 1);
+        else if (e.key === "ArrowRight") showPhoto(lbIndex + 1);
+      } else if (viewer.classList.contains("open") && e.key === "Escape") {
+        closeViewer();
+      }
+    });
+
+    // Featured gallery: placeholder for missing photos, lightbox for real ones
     document.querySelectorAll(".gallery figure").forEach(fig => {
       const img = fig.querySelector("img");
       const markMissing = () => {
@@ -462,14 +747,9 @@
       img.addEventListener("error", markMissing);
       if (img.complete && img.naturalWidth === 0) markMissing();
       fig.addEventListener("click", () => {
-        if (fig.classList.contains("missing")) return;
-        lightbox.querySelector("img").src = img.src;
-        lightbox.querySelector("img").alt = img.alt;
-        lightbox.classList.add("open");
+        if (!fig.classList.contains("missing")) openLightbox(img.getAttribute("src"));
       });
     });
-    lightbox.addEventListener("click", () => lightbox.classList.remove("open"));
-    document.addEventListener("keydown", e => { if (e.key === "Escape") lightbox.classList.remove("open"); });
   </script>
 </body>
 </html>

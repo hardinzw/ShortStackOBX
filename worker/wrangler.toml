@@ -1,0 +1,25 @@
+name = "shortstack-booking"
+main = "src/index.js"
+compatibility_date = "2026-10-01"
+
+# The website: Cloudflare serves these files, and sends every other request to src/index.js
+[assets]
+directory = "../public"
+
+[vars]
+# Websites besides this server's own address and siteUrl (in site-config.json) allowed to
+# start a booking, comma-separated. Usually empty.
+EXTRA_ORIGINS = ""
+
+# Secrets (never put these in this file):
+#   wrangler secret put STRIPE_SECRET_KEY
+#   wrangler secret put STRIPE_WEBHOOK_SECRET
+#   wrangler secret put VRBO_ICAL_URL
+#   wrangler secret put HOUFY_ICAL_URL
+# For local testing, put them in worker/.dev.vars instead (see .dev.vars.example).
+
+[[d1_databases]]
+binding = "DB"
+database_name = "shortstack-bookings"
+database_id = "f74b1860-3b56-4b52-a3e1-29ebbdc6f240"
+migrations_dir = "migrations"
