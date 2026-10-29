@@ -72,10 +72,12 @@ with test card `4242 4242 4242 4242`, any future date and any CVC.
 8. **Automatic deploys**: add `CLOUDFLARE_API_TOKEN` (Cloudflare > My Profile > API Tokens >
    "Edit Cloudflare Workers" template) and `CLOUDFLARE_ACCOUNT_ID` repository secrets and a
    `BOOKING_SERVER_ENABLED` = `true` repository variable. Pushing then publishes the site.
-9. **Your own domain (optional)**: add the domain to Cloudflare (free; you switch its
-   nameservers at your registrar), then Workers & Pages > shortstack-booking > Settings >
-   Domains & Routes > Add > Custom domain. Update `siteUrl` in `site-config.json`, the Stripe
-   webhook address, and the calendar link imported into Vrbo / Houfy.
+9. **Your own domain**: the site lives at `https://shortstackobx.com` (registered with
+   Cloudflare). It's attached in Workers & Pages > shortstack-booking > Settings > Domains &
+   Routes > Add > Custom domain, once for `shortstackobx.com` and once for
+   `www.shortstackobx.com`. `siteUrl` in `site-config.json` points there. Use
+   `https://shortstackobx.com/api/stripe-webhook` for the live Stripe webhook and
+   `https://shortstackobx.com/calendar.ics` for Vrbo / Houfy.
 
 ## Venmo bookings
 

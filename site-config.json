@@ -2,7 +2,7 @@
   "_help": "EDIT THIS FILE each season. The website and the booking server both read it, so prices always match. Dates are YYYY-MM-DD. Changes go live when pushed to GitHub (or with npm run deploy in worker/).",
 
   "ownerEmail": "oldcoveroad112@gmail.com",
-  "siteUrl": "https://shortstack-booking.shortstack-booking.workers.dev/",
+  "siteUrl": "https://shortstackobx.com/",
 
   "_onlineBooking": "true lets guests book and pay online. Leave false until Stripe is set up; guests then get the inquiry form only.",
   "onlineBooking": false,
