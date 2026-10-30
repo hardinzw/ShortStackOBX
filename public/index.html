@@ -99,6 +99,9 @@
     .hero h1 { font-size: clamp(2rem, 3.6vw, 3rem); max-width: 20ch; margin-bottom: .25em; }
     .hero p.lead { font-size: 1.1rem; max-width: 52ch; margin: 0; opacity: .95; }
     .hero .actions { display: flex; gap: 14px; flex-wrap: wrap; }
+    .ratings { display: flex; flex-wrap: wrap; gap: 6px 18px; margin: 12px 0 0; font-size: .92rem; font-weight: 600; }
+    .ratings a { color: var(--sun-light); text-decoration: none; }
+    .ratings a:hover { text-decoration: underline; }
     .facts { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 16px; padding: 0; list-style: none; }
     .facts li { background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.35); padding: 6px 14px; border-radius: 999px; font-size: .92rem; }
     @media (max-width: 760px) {
@@ -218,6 +221,12 @@
     .nearby { list-style: none; padding: 0; margin: 20px 0 0; }
     .nearby li { display: flex; justify-content: space-between; gap: 16px; padding: 10px 0; border-bottom: 1px solid var(--sand-deep); }
     .nearby li span:last-child { color: var(--muted); white-space: nowrap; }
+    .nearby-title { font-size: 1.15rem; margin: 32px 0 0; }
+
+    /* Hosts */
+    #hosts { background: #e8eef6; }
+    .hosts { max-width: 760px; }
+    .hosts p { color: var(--muted); font-size: 1.08rem; }
     @media (max-width: 860px) { .location { grid-template-columns: 1fr; } }
 
     /* Inquiry */
@@ -273,6 +282,11 @@
           <div class="eyebrow">Nags Head · Outer Banks, NC</div>
           <h1>Your cozy family beach retreat</h1>
           <p class="lead">A classic soundside beach box, an 8-minute walk to the ocean, with a soundfront community pool, a hot tub open all year, and free passes to the YMCA waterpark.</p>
+          <!-- EDIT: update the ratings now and then -->
+          <p class="ratings">
+            <a href="https://www.airbnb.com/rooms/1415175414076836939">★ 5.0 on Airbnb</a>
+            <a href="https://www.vrbo.com/3501153">9.6 Exceptional on Vrbo</a>
+          </p>
         </div>
         <div>
           <ul class="facts">
@@ -296,14 +310,14 @@
       <div>
         <div class="eyebrow">The House</div>
         <h2>Designed with families in mind</h2>
-        <p>Tucked into a quiet, soundside Nags Head community, Short Stack is a classic beach box made for families, whether you're here with little ones, teens, grandparents or the whole crew. Upstairs opens into a bright living room and a fully stocked kitchen and dining area. The lower level, refreshed in 2025, adds a private fourth bedroom with its own bath, a rec room with a pool table and kitchenette, and a full-size washer and dryer.</p>
-        <p>You're right between the beach and the sound: an 8-minute walk to the ocean, with a soundfront community pool, playground, pickleball court and boat ramp in the neighborhood, and favorite OBX towns, attractions and dining close by.</p>
+        <p>Tucked into a quiet, soundside Nags Head community, Short Stack is a 2,400-square-foot classic beach box made for families, whether you're here with little ones, teens, grandparents or the whole crew. Upstairs opens into a bright living room and a fully stocked kitchen and dining area. The lower level, refreshed in 2025, adds a private fourth bedroom with its own bath, a rec room with a pool table and kitchenette, and a full-size washer and dryer.</p>
+        <p>You're right between the beach and the sound at milepost 13.5: an 8-minute walk to the ocean, and an 11-minute walk on neighborhood sidewalks to the soundfront community pool, playground, pickleball court and boat ramp. Favorite OBX towns, attractions and dining are close by.</p>
       </div>
       <div class="highlights">
         <div class="highlight"><strong>Walk to the beach</strong><span>About 8 minutes on foot</span></div>
         <div class="highlight"><strong>Private hot tub</strong><span>Open all year, day and night</span></div>
         <div class="highlight"><strong>Community pool</strong><span>Right on the sound, with a playground and pickleball</span></div>
-        <div class="highlight"><strong>YMCA waterpark</strong><span>Free guest passes: big pool, waterslide, indoor pool and gym</span></div>
+        <div class="highlight"><strong>YMCA waterpark</strong><span>A few miles away, with free guest passes in the kitchen: big pool, waterslide, indoor pool and gym</span></div>
       </div>
     </div>
   </section>
@@ -333,6 +347,7 @@
             <li>Covered patio with picnic table</li>
             <li>Charcoal grill</li>
             <li>Private outdoor shower</li>
+            <li>Parking for 4 cars</li>
           </ul>
         </div>
         <div>
@@ -380,10 +395,11 @@
       <div class="weeks" id="weeks"></div>
       <div class="policies">
         <!-- EDIT: your actual policies -->
-        <div><strong>Check-in / out</strong>[4:00 PM] / [10:00 AM] Saturday</div>
+        <div><strong>Check-in / out</strong>4:00 PM / 11:00 AM Saturday. Keyless entry: we send your door code the week you arrive.</div>
         <div><strong>Payment</strong>Full payment at booking by card, Apple Pay or Google Pay<span class="venmo-policy"></span></div>
-        <div><strong>Cancellation</strong>[Your cancellation policy]</div>
-        <div><strong>House rules</strong>Up to 9 guests · No pets · No smoking or vaping · No parties · Renter must be 26 or older</div>
+        <div><strong>Cancellation</strong>Full refund if you cancel at least 30 days before check-in, 50% back between 14 and 30 days, no refund after that.</div>
+        <div><strong>House rules</strong>Up to 9 guests · No pets · No parties or events · No smoking, vaping, candles or incense ($250 fee) · Renter must be 25 or older</div>
+        <div><strong>Security camera</strong>One exterior camera faces the driveway and parking area. There are no cameras inside the home or on the decks.</div>
       </div>
     </div>
   </section>
@@ -393,16 +409,23 @@
       <div>
         <div class="eyebrow">Location</div>
         <h2>Nags Head, right in the middle of it all</h2>
-        <p style="color:var(--muted)">A quiet soundside neighborhood between the beach and the sound, with sunsets over the water, close to favorite OBX towns, attractions and dining.</p>
+        <p style="color:var(--muted)">A quiet soundside neighborhood at milepost 13.5, between the beach and the sound, with sunsets over the water and favorite OBX towns, attractions and dining close by.</p>
         <!-- EDIT: real distances from the house -->
         <ul class="nearby">
           <li><span>Beach access</span><span>8 min walk</span></li>
-          <li><span>Community pool, playground &amp; boat ramp</span><span>[X min walk]</span></li>
-          <li><span>[Grocery store]</span><span>[X min drive]</span></li>
-          <li><span>Jockey's Ridge State Park</span><span>[X min drive]</span></li>
-          <li><span>Wright Brothers National Memorial</span><span>[X min drive]</span></li>
-          <li><span>Cape Hatteras Lighthouse</span><span>[X min drive]</span></li>
-          <li><span>Corolla wild horses</span><span>[X min drive]</span></li>
+          <li><span>Community pool, playground &amp; boat ramp</span><span>11 min walk</span></li>
+          <li><span>Jockey's Ridge State Park</span><span>19 min walk</span></li>
+          <li><span>Nags Head Golf Links</span><span>3 min drive</span></li>
+          <li><span>Nags Head Fishing Pier</span><span>4 min drive</span></li>
+          <li><span>Dare County Regional Airport (Manteo)</span><span>14 min drive</span></li>
+        </ul>
+        <h3 class="nearby-title">Places to eat</h3>
+        <ul class="nearby">
+          <li><span>Mulligan's Grille</span><span>2 min drive</span></li>
+          <li><span>Miller's Waterfront Restaurant</span><span>4 min drive</span></li>
+          <li><span>Morning View Coffee Company</span><span>4 min drive</span></li>
+          <li><span>Fish Heads Bar &amp; Grill</span><span>10 min drive</span></li>
+          <li><span>Blue Moon Beach Grill</span><span>15 min walk</span></li>
         </ul>
       </div>
       <!-- EDIT: Google Maps → search your town or neighborhood → Share → Embed a map → copy the src URL here.
@@ -411,12 +434,21 @@
     </div>
   </section>
 
+  <section id="hosts">
+    <div class="wrap hosts">
+      <div class="eyebrow">Your hosts</div>
+      <h2>A place close to our hearts</h2>
+      <p>Growing up, we traveled to the Outer Banks every summer, and this place holds a special spot in our hearts. It's more than a vacation rental to us. It's a beloved retreat where we're making our own memories, and we hope you'll make yours here too.</p>
+      <p>We've put a lot of love and care into every detail so your stay is comfortable and easy. Have a question? Send us a note. We usually reply within an hour.</p>
+    </div>
+  </section>
+
   <section id="inquire" class="inquire-section">
     <div class="wrap inquire">
       <div>
         <div class="eyebrow">Book your week</div>
         <h2>Send an inquiry</h2>
-        <p style="color:var(--muted)">Tell us which week you're interested in and a little about your group. We usually reply within [24 hours].</p>
+        <p style="color:var(--muted)">Tell us which week you're interested in and a little about your group. We usually reply within an hour.</p>
       </div>
       <form id="inquiry-form">
         <div><label for="name">Name</label><input id="name" name="name" required autocomplete="name"></div>
@@ -434,7 +466,7 @@
   <footer>
     <div class="wrap">
       <span>© <span class="this-year"></span> Short Stack · Nags Head, NC</span>
-      <span>Also on <a href="https://www.airbnb.com/rooms/1415175414076836939">Airbnb</a></span>
+      <span>Also on <a href="https://www.airbnb.com/rooms/1415175414076836939">Airbnb</a> · <a href="https://www.vrbo.com/3501153">Vrbo</a> · <a href="https://www.houfy.com/lodging/short-stack/125473">Houfy</a></span>
     </div>
   </footer>
 
