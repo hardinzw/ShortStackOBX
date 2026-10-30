@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Short Stack: three pancakes on a plate, with syrup and a pat of butter -->
+  <ellipse cx="32" cy="56" rx="29" ry="5" fill="#1d3a6e"/>
+  <rect x="7" y="41" width="50" height="12" rx="6" fill="#d9963f"/>
+  <rect x="7" y="41" width="50" height="6" rx="3" fill="#efb862"/>
+  <rect x="9" y="30" width="46" height="12" rx="6" fill="#d9963f"/>
+  <rect x="9" y="30" width="46" height="6" rx="3" fill="#efb862"/>
+  <rect x="8" y="19" width="48" height="12" rx="6" fill="#d9963f"/>
+  <rect x="8" y="19" width="48" height="6" rx="3" fill="#efb862"/>
+  <path d="M12 20c0-3 3-5 6-5h28c3 0 6 2 6 5v3c0 2-2 2-2 0v-1c-1 0-2 1-2 3v7c0 2.5-3.5 2.5-3.5 0v-6c0-1-1-1.5-2-1.5H22c-1 0-1.5.5-1.5 1.5v3c0 2.5-3.5 2.5-3.5 0v-4c0-1-1-1.5-2-1.5h-1c-1.5 0-2-1-2-2.5z" fill="#c8402f"/>
+  <rect x="26" y="9" width="12" height="8" rx="2" fill="#fde7a0"/>
+  <rect x="26" y="9" width="12" height="3" rx="1.5" fill="#fff4cf"/>
+</svg>
