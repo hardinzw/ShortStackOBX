@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- EDIT: page title and description show up in Google results and link previews -->
   <title>ShortStack · Outer Banks Summer Rental</title>
-  <meta name="description" content="Short Stack — a [X]-bedroom summer rental in [Town], Outer Banks, North Carolina. Steps from the beach. Check weekly availability and send an inquiry.">
+  <meta name="description" content="Short Stack — a [X]-bedroom summer rental in Nags Head, Outer Banks, North Carolina. Steps from the beach. Check weekly availability and send an inquiry.">
   <meta property="og:title" content="Short Stack · Outer Banks Summer Rental">
-  <meta property="og:description" content="[X] bedrooms · [X] baths · sleeps [X] · [Town], NC">
-  <meta property="og:image" content="images/hero.jpg">
+  <meta property="og:description" content="[X] bedrooms · [X] baths · sleeps [X] · Nags Head, NC">
+  <meta property="og:image" content="https://shortstackobx.com/images/AerialFront.avif">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -51,6 +51,7 @@
     }
     .btn:hover { transform: translateY(-1px); background: var(--sun-hover); }
     .btn.ghost { background: transparent; color: var(--white); box-shadow: inset 0 0 0 2px rgba(255,255,255,.8); }
+    .btn.ghost:hover { background: rgba(255,255,255,.12); }
 
     /* Nav */
     nav {
@@ -65,20 +66,44 @@
     nav ul a:hover { color: var(--sea); }
     @media (max-width: 760px) { nav ul { display: none; } }
 
-    /* Hero — replace images/hero.jpg with your best exterior or ocean-view shot */
+    /* Hero: photo mosaic (first photo large, four small), then the headline */
     .hero {
-      min-height: 88vh; display: flex; align-items: flex-end; color: var(--white);
+      padding: 24px 0 64px; color: var(--white);
       background:
         linear-gradient(180deg, rgba(20,33,61,.15) 0%, rgba(20,33,61,.65) 100%),
-        url("images/hero.jpg") center/cover,
         linear-gradient(160deg, #6f8fbf 0%, #1d3a6e 55%, #e4e8ee 100%);
-      padding: 0 0 80px;
     }
-    .hero h1 { font-size: clamp(2.6rem, 7vw, 5rem); max-width: 14ch; }
-    .hero p.lead { font-size: 1.2rem; max-width: 46ch; opacity: .95; }
-    .hero .actions { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 28px; }
-    .facts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; padding: 0; list-style: none; }
+    .hero .eyebrow { color: var(--sun-light); }
+    .mosaic {
+      position: relative; display: grid; grid-template-columns: 2fr 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 8px;
+      height: min(62vh, 540px); border-radius: var(--radius); overflow: hidden; scroll-margin-top: 88px;
+    }
+    .mosaic button { padding: 0; border: 0; overflow: hidden; background: var(--sand-deep); cursor: zoom-in; }
+    .mosaic button:first-child { grid-row: span 2; }
+    .mosaic img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s, filter .2s; }
+    .mosaic button:hover img { transform: scale(1.03); filter: brightness(.92); }
+    /* Shown until a real photo is in place */
+    .mosaic button.missing { cursor: default; background: repeating-linear-gradient(45deg, var(--sand), var(--sand) 12px, var(--sand-deep) 12px, var(--sand-deep) 24px); }
+    .mosaic button.missing img { display: none; }
+    .mosaic .view-all {
+      position: absolute; right: 16px; bottom: 16px; background: var(--white); color: var(--ink); cursor: pointer;
+      border: 0; border-radius: 999px; padding: 10px 18px; font: 600 .92rem "Inter", sans-serif; box-shadow: 0 2px 10px rgba(0,0,0,.25);
+    }
+    .mosaic .view-all:hover { background: var(--sand); }
+    .hero-text { display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px; align-items: end; margin-top: 32px; }
+    .hero h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); max-width: 16ch; margin-bottom: .3em; }
+    .hero p.lead { font-size: 1.15rem; max-width: 46ch; margin: 0; opacity: .95; }
+    .hero .actions { display: flex; gap: 14px; flex-wrap: wrap; }
+    .facts { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 20px; padding: 0; list-style: none; }
     .facts li { background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.35); padding: 6px 14px; border-radius: 999px; font-size: .92rem; }
+    @media (max-width: 760px) {
+      .hero { padding-top: 0; }
+      .hero > .wrap { padding: 0; }
+      .mosaic { grid-template-columns: 1fr; grid-template-rows: 1fr; height: auto; aspect-ratio: 4 / 3; border-radius: 0; }
+      .mosaic button:not(:first-child):not(.view-all) { display: none; }
+      .mosaic .view-all { right: 12px; bottom: 12px; padding: 6px 12px; font-size: .82rem; }
+      .hero-text { grid-template-columns: 1fr; gap: 20px; padding: 0 20px; margin-top: 22px; }
+    }
 
     /* About */
     .about { display: grid; grid-template-columns: 1.1fr .9fr; gap: 56px; align-items: center; }
@@ -89,25 +114,6 @@
     .highlight span { color: var(--muted); font-size: .95rem; }
     @media (max-width: 860px) { .about { grid-template-columns: 1fr; } }
 
-    /* Gallery */
-    .gallery-section { background: var(--white); }
-    .gallery { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 200px; gap: 12px; margin-top: 32px; }
-    .gallery figure { margin: 0; border-radius: var(--radius); overflow: hidden; position: relative; background: var(--sand-deep); cursor: zoom-in; }
-    .gallery figure.wide { grid-column: span 2; }
-    .gallery figure.tall { grid-row: span 2; }
-    .gallery img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
-    .gallery figure:hover img { transform: scale(1.04); }
-    .gallery figcaption { position: absolute; left: 12px; bottom: 10px; color: var(--white); font-size: .85rem; font-weight: 500; text-shadow: 0 1px 4px rgba(0,0,0,.6); }
-    /* Shown until a real photo is in place */
-    .gallery figure.missing { display: grid; place-items: center; cursor: default; background: repeating-linear-gradient(45deg, var(--sand), var(--sand) 12px, var(--sand-deep) 12px, var(--sand-deep) 24px); }
-    .gallery figure.missing img { display: none; }
-    .gallery figure.missing figcaption { position: static; color: var(--muted); text-shadow: none; text-align: center; padding: 0 12px; }
-    @media (max-width: 760px) {
-      .gallery { grid-template-columns: 1fr 1fr; grid-auto-rows: 160px; }
-      .gallery figure.wide { grid-column: span 2; }
-      .gallery figure.tall { grid-row: span 1; }
-    }
-    .gallery-more { margin-top: 24px; text-align: center; }
     .btn.outline { background: transparent; color: var(--sea); box-shadow: inset 0 0 0 2px var(--sea); }
     .btn.outline:hover { background: var(--sea); color: var(--white); }
 
@@ -245,19 +251,36 @@
 
   <header class="hero" id="top">
     <div class="wrap">
-      <div class="eyebrow" style="color:var(--sun-light)">Nags Head · Outer Banks, NC</div>
-      <h1>[Your summer on the Outer Banks starts here]</h1>
-      <p class="lead">[One or two sentences that sell the feeling: morning coffee on the deck, a short walk over the dunes, sunsets over the sound.]</p>
-      <ul class="facts">
-        <li>[X] bedrooms</li>
-        <li>[X] baths</li>
-        <li>Sleeps [X]</li>
-        <li>[X] min walk to beach</li>
-        <li>[Private pool]</li>
-      </ul>
-      <div class="actions">
-        <a class="btn" href="#rates">See summer availability</a>
-        <a class="btn ghost" href="#photos">View photos</a>
+      <!-- EDIT: the five photos at the top (first one is the big one; phones show only that one).
+           Files are in public/images/. A missing photo shows a striped placeholder. -->
+      <div class="mosaic" id="photos">
+        <button type="button"><img src="images/AerialFront.avif" alt="Exterior of the house" fetchpriority="high"></button>
+        <button type="button"><img src="images/LivingRoom1.avif" alt="Living room"></button>
+        <button type="button"><img src="images/KitchenMain.avif" alt="Kitchen"></button>
+        <button type="button"><img src="images/FrontDeck1.1.avif" alt="Front deck"></button>
+        <button type="button"><img src="images/KingRoom1.1.avif" alt="Primary bedroom"></button>
+        <button type="button" class="view-all" id="view-all-photos">View all photos</button>
+      </div>
+
+      <div class="hero-text">
+        <div>
+          <div class="eyebrow">Nags Head · Outer Banks, NC</div>
+          <h1>[Your summer on the Outer Banks starts here]</h1>
+          <p class="lead">[One or two sentences that sell the feeling: morning coffee on the deck, a short walk over the dunes, sunsets over the sound.]</p>
+        </div>
+        <div>
+          <ul class="facts">
+            <li>[X] bedrooms</li>
+            <li>[X] baths</li>
+            <li>Sleeps [X]</li>
+            <li>[X] min walk to beach</li>
+            <li>[Private pool]</li>
+          </ul>
+          <div class="actions">
+            <a class="btn" href="#rates">See summer availability</a>
+            <a class="btn ghost" href="#inquire">Send an inquiry</a>
+          </div>
+        </div>
       </div>
     </div>
   </header>
@@ -279,25 +302,6 @@
     </div>
   </section>
 
-  <section id="photos" class="gallery-section">
-    <div class="wrap">
-      <div class="eyebrow">Photos</div>
-      <h2>Take a look around</h2>
-      <!-- EDIT: put your photos in the public/images/ folder with these names (or change the src values).
-           Use the resized copies in images/web/ (made by resize-images.ps1); full-size camera photos look grainy here.
-           Any photo that's missing shows a striped placeholder instead. -->
-      <div class="gallery">
-        <figure class="wide tall"><img src="images/AerialFront.avif" alt="Exterior of the house"><figcaption>Exterior</figcaption></figure>
-        <figure><img src="images/LivingRoom1.avif" alt="Living room"><figcaption>Living room</figcaption></figure>
-        <figure><img src="images/KitchenMain.avif" alt="Kitchen"><figcaption>Kitchen</figcaption></figure>
-        <figure class="wide"><img src="images/FrontDeck1.1.avif" alt="Deck with view"><figcaption>Deck</figcaption></figure>
-        <figure><img src="images/KingRoom1.1.avif" alt="Primary bedroom"><figcaption>Primary bedroom</figcaption></figure>
-        <figure><img src="images/CommunityPool.avif" alt="Pool"><figcaption>Community Pool</figcaption></figure>
-        <figure class="wide"><img src="images/Aerial.avif" alt="The beach nearby"><figcaption>Aerial View</figcaption></figure>
-      </div>
-      <div class="gallery-more"><button type="button" class="btn outline" id="view-all-photos">View all photos</button></div>
-    </div>
-  </section>
 
   <section id="amenities">
     <div class="wrap">
@@ -370,7 +374,7 @@
     <div class="wrap location">
       <div>
         <div class="eyebrow">Location</div>
-        <h2>[Town], right in the middle of it all</h2>
+        <h2>Nags Head, right in the middle of it all</h2>
         <p style="color:var(--muted)">[A sentence about the area — e.g. close to the Wright Brothers Memorial, Jockey's Ridge, and the best fish tacos on the beach road.]</p>
         <!-- EDIT: real distances from the house -->
         <ul class="nearby">
@@ -411,7 +415,7 @@
 
   <footer>
     <div class="wrap">
-      <span>© <span class="this-year"></span> Short Stack · [Town], NC</span>
+      <span>© <span class="this-year"></span> Short Stack · Nags Head, NC</span>
       <span>[Optional: also listed on VRBO / Airbnb — link here]</span>
     </div>
   </footer>
@@ -737,17 +741,14 @@
       }
     });
 
-    // Featured gallery: placeholder for missing photos, lightbox for real ones
-    document.querySelectorAll(".gallery figure").forEach(fig => {
-      const img = fig.querySelector("img");
-      const markMissing = () => {
-        fig.classList.add("missing");
-        fig.querySelector("figcaption").textContent = `Add ${img.getAttribute("src")}`;
-      };
+    // Hero photos: placeholder for missing photos, lightbox for real ones
+    document.querySelectorAll(".mosaic button:not(.view-all)").forEach(btn => {
+      const img = btn.querySelector("img");
+      const markMissing = () => { btn.classList.add("missing"); btn.title = `Add ${img.getAttribute("src")}`; };
       img.addEventListener("error", markMissing);
       if (img.complete && img.naturalWidth === 0) markMissing();
-      fig.addEventListener("click", () => {
-        if (!fig.classList.contains("missing")) openLightbox(img.getAttribute("src"));
+      btn.addEventListener("click", () => {
+        if (!btn.classList.contains("missing")) openLightbox(img.getAttribute("src"));
       });
     });
   </script>
