@@ -66,17 +66,21 @@
     nav ul a:hover { color: var(--sea); }
     @media (max-width: 760px) { nav ul { display: none; } }
 
-    /* Hero: photo mosaic (first photo large, four small), then the headline */
+    /* Hero: photo mosaic (first photo large, four small), then the headline.
+       Fills the screen below the nav; the photos take whatever height the text leaves. */
     .hero {
-      padding: 24px 0 64px; color: var(--white);
+      display: flex; flex-direction: column;
+      height: calc(100svh - 64px); min-height: 540px; max-height: 920px;
+      padding: 20px 0 36px; color: var(--white);
       background:
         linear-gradient(180deg, rgba(20,33,61,.15) 0%, rgba(20,33,61,.65) 100%),
         linear-gradient(160deg, #6f8fbf 0%, #1d3a6e 55%, #e4e8ee 100%);
     }
+    .hero > .wrap { flex: 1; min-height: 0; width: 100%; display: flex; flex-direction: column; }
     .hero .eyebrow { color: var(--sun-light); }
     .mosaic {
       position: relative; display: grid; grid-template-columns: 2fr 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 8px;
-      height: min(62vh, 540px); border-radius: var(--radius); overflow: hidden; scroll-margin-top: 88px;
+      flex: 1; min-height: 240px; border-radius: var(--radius); overflow: hidden; scroll-margin-top: 88px;
     }
     .mosaic button { padding: 0; border: 0; overflow: hidden; background: var(--sand-deep); cursor: zoom-in; }
     .mosaic button:first-child { grid-row: span 2; }
@@ -90,16 +94,16 @@
       border: 0; border-radius: 999px; padding: 10px 18px; font: 600 .92rem "Inter", sans-serif; box-shadow: 0 2px 10px rgba(0,0,0,.25);
     }
     .mosaic .view-all:hover { background: var(--sand); }
-    .hero-text { display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px; align-items: end; margin-top: 32px; }
-    .hero h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); max-width: 16ch; margin-bottom: .3em; }
-    .hero p.lead { font-size: 1.15rem; max-width: 46ch; margin: 0; opacity: .95; }
+    .hero-text { display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; align-items: end; margin-top: 24px; }
+    .hero h1 { font-size: clamp(2rem, 3.6vw, 3rem); max-width: 20ch; margin-bottom: .25em; }
+    .hero p.lead { font-size: 1.1rem; max-width: 52ch; margin: 0; opacity: .95; }
     .hero .actions { display: flex; gap: 14px; flex-wrap: wrap; }
-    .facts { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 20px; padding: 0; list-style: none; }
+    .facts { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 16px; padding: 0; list-style: none; }
     .facts li { background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.35); padding: 6px 14px; border-radius: 999px; font-size: .92rem; }
     @media (max-width: 760px) {
-      .hero { padding-top: 0; }
+      .hero { height: auto; min-height: 0; max-height: none; padding: 0 0 48px; }
       .hero > .wrap { padding: 0; }
-      .mosaic { grid-template-columns: 1fr; grid-template-rows: 1fr; height: auto; aspect-ratio: 4 / 3; border-radius: 0; }
+      .mosaic { grid-template-columns: 1fr; grid-template-rows: 1fr; flex: none; aspect-ratio: 4 / 3; border-radius: 0; }
       .mosaic button:not(:first-child):not(.view-all) { display: none; }
       .mosaic .view-all { right: 12px; bottom: 12px; padding: 6px 12px; font-size: .82rem; }
       .hero-text { grid-template-columns: 1fr; gap: 20px; padding: 0 20px; margin-top: 22px; }
