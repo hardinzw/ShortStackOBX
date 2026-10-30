@@ -31,3 +31,10 @@ binding = "DB"
 database_name = "shortstack-bookings"
 database_id = "f74b1860-3b56-4b52-a3e1-29ebbdc6f240"
 migrations_dir = "migrations"
+
+# Local testing (npm run dev): http://localhost:8787. Without host, the local server would
+# think it's shortstackobx.com (from routes above) and refuse bookings from the local page.
+[dev]
+ip = "localhost"
+port = 8787
+host = "localhost:8787"
