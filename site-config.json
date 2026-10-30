@@ -21,7 +21,7 @@
   "taxPercent": 0,
 
   "_maxGuests": "Most guests allowed per booking (adults + children). 0 = no limit.",
-  "maxGuests": 0,
+  "maxGuests": 9,
 
   "_requireTerms": "Set to true once your rental agreement is linked in Stripe (Settings > Public details > Terms of service URL). Guests must then tick 'I agree' at checkout.",
   "requireTerms": false,

@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- EDIT: page title and description show up in Google results and link previews -->
   <title>ShortStack · Outer Banks Summer Rental</title>
-  <meta name="description" content="Short Stack — a [X]-bedroom summer rental in Nags Head, Outer Banks, North Carolina. Steps from the beach. Check weekly availability and send an inquiry.">
+  <meta name="description" content="Short Stack — a 4-bedroom family beach house in a quiet soundside Nags Head neighborhood, an 8-minute walk to the beach. Private hot tub, community pool, sleeps 9. Check weekly availability and book.">
   <meta property="og:title" content="Short Stack · Outer Banks Summer Rental">
-  <meta property="og:description" content="[X] bedrooms · [X] baths · sleeps [X] · Nags Head, NC">
+  <meta property="og:description" content="4 bedrooms · 3 baths · sleeps 9 · Nags Head, NC">
   <meta property="og:image" content="https://shortstackobx.com/images/AerialFront.avif">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -50,8 +50,6 @@
       text-decoration: none; cursor: pointer; transition: transform .15s, background .15s;
     }
     .btn:hover { transform: translateY(-1px); background: var(--sun-hover); }
-    .btn.ghost { background: transparent; color: var(--white); box-shadow: inset 0 0 0 2px rgba(255,255,255,.8); }
-    .btn.ghost:hover { background: rgba(255,255,255,.12); }
 
     /* Nav */
     nav {
@@ -110,6 +108,7 @@
     }
 
     /* About */
+    #about { background: #e8eef6; }
     .about { display: grid; grid-template-columns: 1.1fr .9fr; gap: 56px; align-items: center; }
     .about p { color: var(--muted); font-size: 1.08rem; }
     .highlights { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
@@ -162,7 +161,8 @@
     }
 
     /* Amenities */
-    .amenities { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 28px; margin-top: 32px; }
+    #amenities { background: var(--white); }
+    .amenities { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 28px; margin-top: 32px; }
     .amenities h3 { font-size: 1.15rem; color: var(--sea-dark); }
     .amenities ul { list-style: none; margin: 0; padding: 0; }
     .amenities li { padding: 6px 0 6px 26px; position: relative; border-bottom: 1px solid var(--sand-deep); }
@@ -249,7 +249,6 @@
         <li><a href="#rates">Rates</a></li>
         <li><a href="#location">Location</a></li>
       </ul>
-      <a class="btn" href="#inquire" style="padding:10px 20px">Check dates</a>
     </div>
   </nav>
 
@@ -269,20 +268,20 @@
       <div class="hero-text">
         <div>
           <div class="eyebrow">Nags Head · Outer Banks, NC</div>
-          <h1>[Your summer on the Outer Banks starts here]</h1>
-          <p class="lead">[One or two sentences that sell the feeling: morning coffee on the deck, a short walk over the dunes, sunsets over the sound.]</p>
+          <h1>Your cozy family beach retreat</h1>
+          <p class="lead">A classic soundside beach box, an 8-minute walk to the ocean, with a soundfront community pool, a hot tub open all year, and free passes to the YMCA waterpark.</p>
         </div>
         <div>
           <ul class="facts">
-            <li>[X] bedrooms</li>
-            <li>[X] baths</li>
-            <li>Sleeps [X]</li>
-            <li>[X] min walk to beach</li>
-            <li>[Private pool]</li>
+            <li>4 bedrooms</li>
+            <li>3 baths</li>
+            <li>Sleeps 9</li>
+            <li>8 min walk to beach</li>
+            <li>Private hot tub</li>
           </ul>
           <div class="actions">
-            <a class="btn" href="#rates">See summer availability</a>
-            <a class="btn ghost" href="#inquire">Send an inquiry</a>
+            <a class="btn" href="#rates">Check availability</a>
+            <a class="btn" href="#inquire">Send an inquiry</a>
           </div>
         </div>
       </div>
@@ -293,15 +292,15 @@
     <div class="wrap about">
       <div>
         <div class="eyebrow">The House</div>
-        <h2>[A headline about what makes this place special]</h2>
-        <p>[Describe the house in a few short paragraphs. What's the layout? Who is it perfect for — multi-generation families, a couple of families sharing, a group of friends? What do past guests love most?]</p>
-        <p>[Mention the neighborhood: quiet cul-de-sac, oceanside vs. soundside, milepost, and anything a guest would otherwise ask about.]</p>
+        <h2>Designed with families in mind</h2>
+        <p>Tucked into a quiet, soundside Nags Head community, Short Stack is a classic beach box made for families, whether you're here with little ones, teens, grandparents or the whole crew. Upstairs opens into a bright living room and a fully stocked kitchen and dining area. The lower level, refreshed in 2025, adds a private fourth bedroom with its own bath, a rec room with a pool table and kitchenette, and a full-size washer and dryer.</p>
+        <p>You're right between the beach and the sound: an 8-minute walk to the ocean, with a soundfront community pool, playground, pickleball court and boat ramp in the neighborhood, and favorite OBX towns, attractions and dining close by.</p>
       </div>
       <div class="highlights">
-        <div class="highlight"><strong>[Ocean view]</strong><span>[From the top-floor deck]</span></div>
-        <div class="highlight"><strong>[Private pool]</strong><span>[Heated, fenced]</span></div>
-        <div class="highlight"><strong>[Walk to beach]</strong><span>[Public access ~X yards]</span></div>
-        <div class="highlight"><strong>[Pet friendly]</strong><span>[Up to 2 dogs, fee applies]</span></div>
+        <div class="highlight"><strong>Walk to the beach</strong><span>About 8 minutes on foot</span></div>
+        <div class="highlight"><strong>Private hot tub</strong><span>Open all year, day and night</span></div>
+        <div class="highlight"><strong>Community pool</strong><span>Right on the sound, with a playground and pickleball</span></div>
+        <div class="highlight"><strong>YMCA waterpark</strong><span>Free guest passes: big pool, waterslide, indoor pool and gym</span></div>
       </div>
     </div>
   </section>
@@ -316,40 +315,52 @@
         <div>
           <h3>Sleeping</h3>
           <ul>
-            <li>[King — primary suite]</li>
-            <li>[Queen — bedroom 2]</li>
-            <li>[2 twins — bedroom 3]</li>
-            <li>[Bunk room — bedroom 4]</li>
-            <li>Linens &amp; towels [provided / bring your own]</li>
+            <li>Primary: king bed, private bath</li>
+            <li>Bunk room: twin-over-queen bunk, Roku TV</li>
+            <li>King bed, desk, Roku TV</li>
+            <li>Downstairs: queen bed, private bath, Roku TV</li>
+            <li>Bed linens &amp; bath towels provided</li>
           </ul>
         </div>
         <div>
           <h3>Outdoors</h3>
           <ul>
-            <li>[Private pool]</li>
-            <li>[Hot tub]</li>
-            <li>[Covered &amp; open decks]</li>
-            <li>[Outdoor shower]</li>
-            <li>[Gas grill]</li>
+            <li>Private hot tub, open all year</li>
+            <li>Wraparound deck &amp; upper deck</li>
+            <li>Covered patio with picnic table</li>
+            <li>Charcoal grill</li>
+            <li>Private outdoor shower</li>
           </ul>
         </div>
         <div>
-          <h3>Beach gear</h3>
+          <h3>Beach &amp; play</h3>
           <ul>
-            <li>[Beach chairs &amp; umbrella]</li>
-            <li>[Boogie boards]</li>
-            <li>[Beach cart]</li>
-            <li>[Bikes]</li>
+            <li>Beach chairs, umbrellas &amp; toys</li>
+            <li>Beach wagon</li>
+            <li>Two adult beach cruisers</li>
+            <li>Spikeball, Kan Jam &amp; bocce</li>
+            <li>Pool table &amp; Nintendo Wii</li>
           </ul>
         </div>
         <div>
           <h3>Inside</h3>
           <ul>
             <li>Central A/C</li>
-            <li>[Fast Wi-Fi]</li>
-            <li>[Full kitchen with dishwasher]</li>
-            <li>[Washer &amp; dryer]</li>
-            <li>[Smart TVs with streaming]</li>
+            <li>Wi-Fi &amp; desk with monitor</li>
+            <li>Full kitchen with dishwasher</li>
+            <li>Keurig &amp; drip coffee makers</li>
+            <li>Washer &amp; dryer</li>
+            <li>Roku TVs</li>
+          </ul>
+        </div>
+        <div>
+          <h3>For little ones</h3>
+          <ul>
+            <li>High chair &amp; pack 'n play</li>
+            <li>Baby gate</li>
+            <li>Sound machine</li>
+            <li>Kids' books, toys &amp; dishes</li>
+            <li>Community playground</li>
           </ul>
         </div>
       </div>
@@ -369,7 +380,7 @@
         <div><strong>Check-in / out</strong>[4:00 PM] / [10:00 AM] Saturday</div>
         <div><strong>Payment</strong>Full payment at booking by card, Apple Pay or Google Pay<span class="venmo-policy"></span></div>
         <div><strong>Cancellation</strong>[Your cancellation policy]</div>
-        <div><strong>House rules</strong>[No smoking · Pets with approval · Min. renter age 25]</div>
+        <div><strong>House rules</strong>Up to 9 guests · No pets · No smoking or vaping · No parties · Renter must be 26 or older</div>
       </div>
     </div>
   </section>
@@ -379,10 +390,11 @@
       <div>
         <div class="eyebrow">Location</div>
         <h2>Nags Head, right in the middle of it all</h2>
-        <p style="color:var(--muted)">[A sentence about the area — e.g. close to the Wright Brothers Memorial, Jockey's Ridge, and the best fish tacos on the beach road.]</p>
+        <p style="color:var(--muted)">A quiet soundside neighborhood between the beach and the sound, with sunsets over the water, close to favorite OBX towns, attractions and dining.</p>
         <!-- EDIT: real distances from the house -->
         <ul class="nearby">
-          <li><span>Beach access</span><span>[X min walk]</span></li>
+          <li><span>Beach access</span><span>8 min walk</span></li>
+          <li><span>Community pool, playground &amp; boat ramp</span><span>[X min walk]</span></li>
           <li><span>[Grocery store]</span><span>[X min drive]</span></li>
           <li><span>Jockey's Ridge State Park</span><span>[X min drive]</span></li>
           <li><span>Wright Brothers National Memorial</span><span>[X min drive]</span></li>
@@ -402,7 +414,6 @@
         <div class="eyebrow">Book your week</div>
         <h2>Send an inquiry</h2>
         <p style="color:var(--muted)">Tell us which week you're interested in and a little about your group. We usually reply within [24 hours].</p>
-        <p style="color:var(--muted)">Prefer to talk? Call or text <a href="tel:+10000000000">[(000) 000-0000]</a>.</p>
       </div>
       <form id="inquiry-form">
         <div><label for="name">Name</label><input id="name" name="name" required autocomplete="name"></div>
@@ -420,7 +431,7 @@
   <footer>
     <div class="wrap">
       <span>© <span class="this-year"></span> Short Stack · Nags Head, NC</span>
-      <span>[Optional: also listed on VRBO / Airbnb — link here]</span>
+      <span>Also on <a href="https://www.airbnb.com/rooms/1415175414076836939">Airbnb</a></span>
     </div>
   </footer>
 
